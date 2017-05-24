@@ -26,4 +26,24 @@ recursiveSum n = go n 0
 -- 3. Write a function that multiplies two integral numbers using 
 --    recursive summation
 multTwo :: (Integral a) => a -> a -> a
-multTwo x y = 
+multTwo x y = go x 0
+  where go n acc
+          | n == 0 = acc
+          | otherwise = go (n-1) (acc+y)
+
+-- Fix dividedBy
+data DividedResult = Result Integer | DividedByZero
+  deriving (Show)
+
+dividedBy' :: Integral a => a -> a -> DividedResult
+dividedBy' num denom
+  | denom == 0 = DividedByZero
+  | otherwise = go (abs num) (abs denom) 0
+      where go n d count
+              | n < d = Result (sig num denom * count)
+              | otherwise = go (n - d) d (count + 1)
+            sig n d
+              | num < 0 && denom < 0 = 1
+              | num > 0 && denom > 0 = 1
+              | otherwise = -1
+
