@@ -1,17 +1,30 @@
 -- implement custom enumFromTos without range syntax
 
 eftBool :: Bool -> Bool -> [Bool]
-eftBool x y = go x y [x]        -- I don't like this [x]
+eftBool x y = go x y []
   where go n m acc
-          | n == m = reverse acc
-          | n > m = []          -- this is ugly
-          | otherwise = go (succ n) m (succ n : acc)
+          | n > m = []
+          | n == m = reverse (n : acc)
+          | otherwise = go (succ n) m (n : acc)
 
 eftOrd :: Ordering -> Ordering -> [Ordering]
-eftOrd = undefined
+eftOrd x y = go x y []
+  where go n m acc
+          | n > m = []
+          | n == m = reverse (n : acc)
+          | otherwise = go (succ n) m (n : acc)
+
+-- I'm pretty sure this was not the point of the exercise
+-- as I will logically result in the same solution for all 4 cases
+
+go n m acc
+          | n > m = []
+          | n == m = reverse (n : acc)
+          | otherwise = go (succ n) m (n : acc)
 
 eftInt :: Int -> Int -> [Int]
-eftInt = undefined
+eftInt x y = go x y []
 
-eftChar :: Char -> Char -> [Char]
-eftChar = undefined
+eftChar :: Char -> Char -> String
+eftChar x y = go x y []
+
