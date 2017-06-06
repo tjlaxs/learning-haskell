@@ -1,6 +1,7 @@
 -- 1. myOr returns True if any Bool in the list is True
 myOr :: [Bool] -> Bool
-myOr = undefined
+myOr [] = False
+myOr (x:xs) = x || myOr xs
 
 -- 2. myAny returns True if a -> Bool applied to any of the values
 --    in the list returns True.
