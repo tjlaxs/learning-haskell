@@ -6,7 +6,8 @@ myOr (x:xs) = x || myOr xs
 -- 2. myAny returns True if a -> Bool applied to any of the values
 --    in the list returns True.
 myAny :: (a -> Bool) -> [a] -> Bool
-myAny = undefined
+myAny _ [] = False
+myAny f (x:xs) = f x || myAny f xs
 
 -- 3. myElem with recursion and myElem with myAny
 myElem :: Eq a => a -> [a] -> Bool
