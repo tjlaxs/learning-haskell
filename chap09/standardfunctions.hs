@@ -25,7 +25,12 @@ myReverse s = go s []
 
 -- 5. squish flattens a list of lists into a list
 squish :: [[a]] -> [a]
-squish = undefined
+squish [] = []
+squish l = go l []
+  where go [] acc = reverse acc
+        go (l:ls) acc = go ls (go2 l acc)
+          where go2 [] acc = acc
+                go2 (x:xs) acc = go2 xs (x : acc)
 
 -- 6. squishMap maps a function over a list and concatenates the results
 squishMap :: (a -> [b]) -> [a] -> [b]
