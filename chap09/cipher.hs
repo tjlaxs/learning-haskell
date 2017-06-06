@@ -6,12 +6,12 @@ caesar :: Int -> String -> String
 caesar _ [] = []
 caesar n s = go s []
   where go [] acc = reverse acc
-        go (x:xs) acc = go xs (chr newX : acc)
+        go (x:xs) acc = go xs (newX : acc)
           where sft = (ord x - ord 'a' + n) `mod` 26
-                newX = ord 'a' + sft
+                newX = chr $ ord 'a' + sft
 
 unCaesar :: Int -> String -> String
-unCaesar = undefined
+unCaesar n = caesar (-n)
 
 -- for testing
 rot13 = caesar 13
