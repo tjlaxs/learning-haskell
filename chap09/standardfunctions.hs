@@ -11,10 +11,11 @@ myAny f (x:xs) = f x || myAny f xs
 
 -- 3. myElem with recursion and myElem with myAny
 myElem :: Eq a => a -> [a] -> Bool
-myElem = undefined
+myElem _ [] = False
+myElem e (x:xs) = (x == e) || myElem e xs
 
 myElem' :: Eq a => a -> [a] -> Bool
-myElem' = undefined
+myElem' e = myAny (== e)
 
 -- 4. myReverse
 myReverse :: [a] -> [a]
