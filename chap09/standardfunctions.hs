@@ -19,7 +19,9 @@ myElem' e = myAny (== e)
 
 -- 4. myReverse
 myReverse :: [a] -> [a]
-myReverse = undefined
+myReverse s = go s []
+  where go [] acc = acc
+        go (x:xs) acc = go xs (x : acc)
 
 -- 5. squish flattens a list of lists into a list
 squish :: [[a]] -> [a]
