@@ -48,16 +48,20 @@ squishAgain = squishMap (\x -> x)
 --    element of the list based on the last value that the comparison returned
 --    GT for
 myMaximumBy :: (a -> a -> Ordering) -> [a] -> a
-myMaximumBy = undefined
+myMaximumBy f (x:xs) = go xs x
+  where go [] m = m
+        go (x:xs) m = if f m x == GT then go xs m else go xs x
 
 -- 9. myMinimumBy returns similarly last value that returned LT for
 myMinimumBy :: (a -> a -> Ordering) -> [a] -> a
-myMinimumBy = undefined
+myMinimumBy f (x:xs) = go xs x
+  where go [] m = m
+        go (x:xs) m = if f m x == LT then go xs m else go xs x
 
 -- 10. Using myMaximumBy and myMinimumBy write maximum and minimum
 myMaximum :: (Ord a) => [a] -> a
-myMaximum = undefined
+myMaximum = myMaximumBy compare
 
 myMinimum :: (Ord a) => [a] -> a
-myMinimum = undefined
+myMinimum = myMinimumBy compare
 
