@@ -34,11 +34,15 @@ squish l = go l []
 
 -- 6. squishMap maps a function over a list and concatenates the results
 squishMap :: (a -> [b]) -> [a] -> [b]
-squishMap = undefined
+squishMap f l = go l []
+  where go [] acc = reverse acc
+        go (l:ls) acc = go ls (go2 (f l) acc)
+          where go2 [] acc = acc
+                go2 (x:xs) acc = go2 xs (x : acc)
 
 -- 7. squishAgain flattens a list of lists into a list (use squishMap)
 squishAgain :: [[a]] -> [a]
-squishAgain = undefined
+squishAgain = squishMap (\x -> x)
 
 -- 8. myMaximumBy takes a comparison function and a list and returns greatest
 --    element of the list based on the last value that the comparison returned
